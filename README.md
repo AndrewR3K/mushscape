@@ -27,3 +27,10 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### TODO
+- Add Characters
+- Add Weapons/Inventory
+- Add Health/Stats
+- Add fights
+- Add death endings
