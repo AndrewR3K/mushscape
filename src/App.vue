@@ -27,10 +27,7 @@
                     <div class="hidden lg:inline-block">
                         <ul class="mr-2 space-x-2 menu horizontal">
                             <li>
-                                <a target="_blank" href="#" class="rounded-btn">Github</a>
-                            </li>
-                            <li>
-                                <a target="_blank" href="#" class="rounded-btn">Discord</a>
+                                <a target="_blank" href="https://github.com/AndrewR3K/mushscape" class="rounded-btn">Github</a>
                             </li>
                         </ul>
                     </div>
@@ -109,10 +106,7 @@
             <label for="menu-drawer" class="drawer-overlay"></label>
             <ul class="p-4 overflow-y-auto menu w-80 bg-base-100">
                 <li>
-                    <a target="_blank" href="#">Github</a>
-                </li>
-                <li>
-                    <a target="_blank" href="#">Discord</a>
+                    <a target="_blank" href="https://github.com/AndrewR3K/mushscape">Github</a>
                 </li>
             </ul>
         </div>
