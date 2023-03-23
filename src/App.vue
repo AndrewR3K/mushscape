@@ -135,7 +135,7 @@
 
 
             <p class="font-bold">
-                Site created by <a class="link link-primary">bytesizd</a>
+                Site created by <a href="https://github.com/AndrewR3K" target="_blank" class="link link-primary">bytesizd</a>
             </p>
             <p>Copyright © 2023 - All right reserved</p>
         </div>
