@@ -1,6 +1,6 @@
 <template>
-    <mHeader>
-        <div class="w-full max-w-md p-4 text-center">
+    <mHeader class="drawer">
+        <div class="p-4 text-center">
             <div class="mx-auto avatar">
                 <div v-if="promptimage" class="w-256 h-256 mb-8 mask mask-squircle bg-secondary">
                     <img :src="promptimage.url" />
@@ -23,7 +23,7 @@
 
             <h2 v-if="!game_started" class="py-2 text-4xl font-bold mb-2">MushScape</h2>
             <div v-if="!game_started" class="py-2 text-2xl font-medium mb-8">Enter the world of Mushscape - the AI-powered
-                text-based RPG that's full of surprises! Explore a magical universe filled with challenges and unexpected
+                text-based Adventure that's full of surprises! Explore a magical universe filled with challenges and unexpected
                 twists. Are you ready for the adventure?</div>
 
 
@@ -88,19 +88,19 @@
                     </div>
                 </Transition>
             </div>
-            <div v-else class="pb-3">
+            <div v-else class="pb-3 mb-10">
                 <div v-if="gameloading">
                     <h2 class="py-2 text-2xl font-bold inline-flex items-center">
                         Generating Scene...
                     </h2>
                 </div>
                 <div v-else>
-                    <h2 class="py-2 text-2xl font-bold">{{ currentPrompt.prompt }}</h2>
+                    <h3 class="py-2 text-2xl font-bold">{{ currentPrompt.prompt }}</h3>
 
 
-                    <div class="text-sm text-opacity-70 text-base-content"
+                    <div class="text-sm text-opacity-70 text-base-content mt-6"
                         v-for="(response, index) in currentPrompt.responses" :key="index">
-                        <button class="btn btn-secondary mt-6" @click="respondToPrompt(response)">{{
+                        <button class="rounded btn-secondary px-4 py-6 w-full" @click="respondToPrompt(response)">{{
                             response }}</button>
                     </div>
                 </div>
@@ -147,8 +147,9 @@ export default {
             currentPrompt: {},
             promptimage: null,
             apikey: '',
-            tokens: 31,
+            tokens: 50,
             errors: [],
+            historic: [],
             error: '',
             showsettings: false
         };
@@ -157,6 +158,9 @@ export default {
         mHeader: Header,
         mFooter: Footer,
         mCard: Card
+    },
+    mounted() {
+        this.apikey = import.meta.env.VITE_SAPIKEY || ''
     },
     methods: {
         async startGame() {
@@ -214,7 +218,7 @@ export default {
 
             return img[0]
         },
-        async askGPT(question) {
+        async askGPT(question, tokens) {
             axiosRetry(axios, { retries: 3 });
             const client = axios.create({
                 headers: {
@@ -226,7 +230,8 @@ export default {
             const params = {
                 prompt: question,
                 model: "text-davinci-003",
-                max_tokens: this.tokens
+                max_tokens: tokens || this.tokens,
+                temperature: 1
             };
             let rsp = await client
                 .post("https://api.openai.com/v1/completions", params)
@@ -245,27 +250,30 @@ export default {
             return split.join('.')
         },
         async generateTitle() {
-            const response = await this.askGPT(`Create a title for a text based rpg thats first prompt is "${this.currentPrompt.prompt}"`)
+            const response = await this.askGPT(`Create a title for a text based game thats first prompt is "${this.currentPrompt.prompt}"`)
             this.gametitle = response
         },
         async generateScenerio() {
-            const response = await this.askGPT(`Create a scenerio for the start of a text based adventure that concludes with a question for a player`)
+            const response = await this.askGPT(`Create a scenerio for and EPIC adventure, that has the title "${this.gametitle}", that puts a main character in random situation. This prompt but describe a place, mood, and start to a story that should end with an objective for the main character. MUST use complete sentences. If refering to the main character, "you" must be used instead.  Never reference the title of the story.`)
             this.currentPrompt = {
-                prompt: response,
+                prompt: response.replaceAll('"', ''),
                 responses: []
             }
         },
         async GenerateResponseList(amt) {
+            let responses = []
             for (let index = 0; index < amt; index++) {
                 this.delay(1000 * index)
-                const prompt = `The character ${this.currentCharacter} responds to the prompt "${this.currentPrompt.prompt}" with a message and action to progress through the text based game. Must be in first person.`;
-                this.currentPrompt.responses.push(await this.askGPT(prompt))
+                const prompt = `So far the story has had the following prompts and responses: ${this.historic.join(' ')}; Keeping the story history stated priot in mind, create a NEW response for the character ${this.currentCharacter} response to the prompt "${this.currentPrompt.prompt}" with a message and action to progress the character through the text based games story. Response must not repeat the prompt. Must be in first person.`;
+                this.currentPrompt.responses.push(await this.askGPT(prompt, 35))
             }
         },
         async respondToPrompt(response) {
             this.gameloading = true
 
-            const responseprompt = `Create a new prompt for a text based story where the last prompt was "${this.currentPrompt.prompt}" and the character ${this.currentCharacter} just responded to the prompt with "${response}". This new prompt should end with a goal or objective to progress the character ${this.currentCharacter} through the text based game. If you see fit, you can add story, and potentially an ending.`;
+            this.historic.push(`The prompt is "${this.currentPrompt.prompt}" and the character ${this.currentCharacter} responded to the prompt with "${response}".`)
+
+            const responseprompt = `So far the story, that has the title "${this.gametitle}", has had the following prompts and responses: ${this.historic.join(' ')}; Keeping the story history stated priot in mind, create a new prompt for a text based story where the last prompt was "${this.currentPrompt.prompt}" and the character ${this.currentCharacter} just responded to the prompt with "${response}". This new prompt should end with a goal or objective to progress the character ${this.currentCharacter} through the text based game. There is a random chance for this prompt end the story. There is a random chance for this prompt to add a major story plot point. Never reference that this is a prompt. Never reference the title of the story.`;
             const rsp = await this.askGPT(responseprompt)
             this.currentPrompt = {
                 prompt: rsp,
@@ -306,5 +314,9 @@ export default {
 .cog:hover {
     transform: rotate(90deg);
     transition: all 0.4s ease-out;
+}
+
+h3 {
+    font-size: 1rem;
 }
 </style>

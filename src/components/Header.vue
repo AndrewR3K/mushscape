@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen bg-base-200 drawer text-base-content prevent-select">
+    <div>
         <!-- this checkbox controls if drawer is open -->
         <input id="menu-drawer" type="checkbox" class="drawer-toggle" />
         <div class="flex flex-col drawer-content">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <!-- main content -->
-            <div class="grid flex-grow place-content-center">
+            <div class="grid flex-grow align-center self-center place-content-center max-w-md">
                 <slot></slot>
             </div>
         </div>

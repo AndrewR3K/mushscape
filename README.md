@@ -1,36 +1,51 @@
 # MushScape
 
-Enter the world of Mushscape - the AI-powered text-based RPG that's full of surprises! Explore a magical universe filled with challenges and unexpected twists. Are you ready for the adventure?
+Welcome to MushScape, an AI-powered text-based RPG that takes you on an exciting adventure through a magical universe full of challenges and unexpected twists. MushScape is an open source project and we welcome contributions from the community. This README provides you with all the information you need to get started with contributing to the game.
+
+## Getting Started
+
+To get started with MushScape, you will need to follow these simple steps:
+
+1. Fork the repository to your own GitHub account.
+2. Clone the repository to your local machine using `git clone https://github.com/yourusername/mushscape.git`.
+3. Install the necessary dependencies by running `npm install` in the project root directory.
+4. Start the development server by running `npm run dev`.
+5. Open your browser and navigate to `http://localhost:3000` to start playing the game and making changes to the code.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+We recommend using VSCode as your primary IDE for working with MushScape. You can use the following plugins to enhance your development experience:
 
-## Customize configuration
+- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur)
+- [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Configuration
 
-## Project Setup
+You can customize the configuration of MushScape using the Vite Configuration Reference. Refer to the [Vite Configuration Reference](https://vitejs.dev/config/) for more information.
 
-```sh
-npm install
-```
+## Scripts
 
-### Compile and Hot-Reload for Development
+The following scripts are available in MushScape:
 
-```sh
-npm run dev
-```
+- dev: starts the development server using Vite
+- build: builds the project for production using Vite
+- preview: previews the built project using Vite
 
-### Compile and Minify for Production
+## Contributing
 
-```sh
-npm run build
-```
+We welcome contributions to MushScape from the open source community. Here are the steps to contribute:
 
-### TODO
-- Add Characters
-- Add Weapons/Inventory
-- Add Health/Stats
-- Add fights
-- Add death endings
+1. Fork the repository to your own GitHub account.
+2. Clone the repository to your local machine using `git clone https://github.com/yourusername/mushscape.git`.
+3. Create a new branch for your feature using `git checkout -b my-feature`.
+4. Make the necessary changes and commit them using `git commit -am 'Added my new feature'`.
+5. Push the changes to your fork using `git push origin my-feature`.
+6. Create a pull request on the main repository.
+
+## Code of Conduct
+
+We expect all contributors to adhere to our Code of Conduct. Please read the `CODE_OF_CONDUCT.md` file for more information.
+
+## License
+
+MushScape is licensed under the MIT License. Please refer to the `LICENSE` file for more information.
