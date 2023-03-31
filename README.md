@@ -44,7 +44,7 @@ We welcome contributions to MushScape from the open source community. Here are t
 
 ## Code of Conduct
 
-We expect all contributors to adhere to our Code of Conduct. Please read the [MushScape Open Source Repo Code of Conduct](CODE_OF_CONDUCT.md) file for more information.
+We expect all contributors to adhere to our Code of Conduct. Please read the [MushScape Open Source Repo Code of Conduct](.github/CODE_OF_CONDUCT.md) file for more information.
 
 ## License
 
