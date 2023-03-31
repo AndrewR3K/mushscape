@@ -33,7 +33,7 @@ The following scripts are available in MushScape:
 
 ## Contributing
 
-We welcome contributions to MushScape from the open source community. Here are the steps to contribute:
+We welcome [contributions](.github/CONTRIBUTING.md) to MushScape from the open source community. Here are the steps to contribute:
 
 1. Fork the repository to your own GitHub account.
 2. Clone the repository to your local machine using `git clone https://github.com/yourusername/mushscape.git`.
